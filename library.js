@@ -54,7 +54,7 @@ const KeepAliveWorkflow = async (githubToken, committerUsername, committerEmail,
         }
         resolve('Dummy commit created to keep the repository active...');
       } else {
-        resolve('Nothing to do...');
+        resolve(`Nothing to do... (elapsed date: ${diffInDays})`);
       }
     } catch (e) {
       reject(e);
@@ -112,7 +112,7 @@ const APIKeepAliveWorkflow = (githubToken,
         response.status.toString() === '204' ? resolve('Kept repo active using the GitHUb API...') :
           reject(response);
       } else {
-        resolve('Nothing to do...');
+        resolve(`Nothing to do... (elapsed date: ${diffInDays})`);
       }
     } catch (e) {
       reject(e);
