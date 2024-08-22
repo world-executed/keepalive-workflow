@@ -11,18 +11,18 @@ const { Octokit } = require("@octokit/rest");
  * @param {string} committerUsername - Username of the GitHub user to create dummy commit
  * @param {string} committerEmail - Email id of the GitHub user to create dummy commit
  * @param {string} commitMessage - Commit message while doing dummy commit
- * @param {number} [timeElapsed=50] - Time elapsed from the last commit to trigger a new automated commit (in days). Default: 50
+ * @param {number} [timeElapsed=45] - Time elapsed from the last commit to trigger a new automated commit (in days). Default: 45
  * @param {boolean} [autoPush=false] - Boolean flag to define if the library should automatically push the changes. Default: false
  * @param {boolean} [autoWriteCheck=false] - Enables automatic checking of the token for branch protection rules
  * @return {Promise<string, Error>} - Promise with success message or failure object
  */
-const KeepAliveWorkflow = async (githubToken, committerUsername, committerEmail, commitMessage, timeElapsed = 50, autoPush = false, autoWriteCheck = false) => {
+const KeepAliveWorkflow = async (githubToken, committerUsername, committerEmail, commitMessage, timeElapsed = 45, autoPush = false, autoWriteCheck = false) => {
   return new Promise(async (resolve, reject) => {
     try {
       writeDetectionCheck(autoWriteCheck, reject, resolve);
       const diffInDays = await getDiffInDays();
       if (diffInDays >= timeElapsed) {
-        // Do dummy commit if elapsed time is greater than 50 (default) days
+        // Do dummy commit if elapsed time is greater than 45 (default) days
         await execute('git', [
           'config',
           '--global',
@@ -68,7 +68,7 @@ const KeepAliveWorkflow = async (githubToken, committerUsername, committerEmail,
  * @property {string|null} [workflowFile=null] - Action file name to keepalive eg: `test.yaml'. If you omit this parameter,
  * the script will automatically figure it out from the current run metadata.
  * @property {string} [apiBaseUrl=process.env.GITHUB_API_URL] - API Base url. Change this if you are using GitHub enterprise hosted version.
- * @property {number} [timeElapsed=50] - Time elapsed from the last commit to trigger a new automated commit (in days). Default: 50
+ * @property {number} [timeElapsed=45] - Time elapsed from the last commit to trigger a new automated commit (in days). Default: 45
  * @property {boolean} [autoWriteCheck=false] - Enables automatic checking of the token for branch protection rules
  */
 
@@ -88,7 +88,7 @@ const APIKeepAliveWorkflow = (githubToken,
                                   (!!process.env.GITHUB_API_URL) ?
                                     process.env.GITHUB_API_URL : 'https://api.github.com'
                                 ),
-                                timeElapsed = 50,
+                                timeElapsed = 45,
                                 autoWriteCheck = false
                               } = {}) => {
   return new Promise(async (resolve, reject) => {
