@@ -3945,7 +3945,7 @@ var require_library = __commonJS({
   "library.js"(exports2, module2) {
     var { execute, getDiffInDays, writeDetectionCheck } = require_util();
     var { Octokit } = require_dist_node12();
-    var KeepAliveWorkflow2 = async (githubToken2, committerUsername2, committerEmail2, commitMessage2, timeElapsed2 = 50, autoPush2 = false, autoWriteCheck2 = false) => {
+    var KeepAliveWorkflow2 = async (githubToken2, committerUsername2, committerEmail2, commitMessage2, timeElapsed2 = 45, autoPush2 = false, autoWriteCheck2 = false) => {
       return new Promise(async (resolve, reject) => {
         try {
           writeDetectionCheck(autoWriteCheck2, reject, resolve);
@@ -3994,7 +3994,7 @@ var require_library = __commonJS({
     var APIKeepAliveWorkflow2 = (githubToken2, {
       workflowFile = null,
       apiBaseUrl = !!process.env.GITHUB_API_URL ? process.env.GITHUB_API_URL : "https://api.github.com",
-      timeElapsed: timeElapsed2 = 50,
+      timeElapsed: timeElapsed2 = 45,
       autoWriteCheck: autoWriteCheck2 = false
     } = {}) => {
       return new Promise(async (resolve, reject) => {
