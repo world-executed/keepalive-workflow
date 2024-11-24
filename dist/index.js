@@ -3949,7 +3949,7 @@ var require_library = __commonJS({
       return new Promise(async (resolve, reject) => {
         try {
           writeDetectionCheck(autoWriteCheck2, reject, resolve);
-          const diffInDays = await getDiffInDays();
+          const diffInDays = timeElapsed2 === 0 ? 0 : await getDiffInDays();
           if (diffInDays >= timeElapsed2) {
             await execute("git", [
               "config",
@@ -4000,7 +4000,7 @@ var require_library = __commonJS({
       return new Promise(async (resolve, reject) => {
         try {
           writeDetectionCheck(autoWriteCheck2, reject, resolve);
-          const diffInDays = await getDiffInDays();
+          const diffInDays = timeElapsed2 === 0 ? 0 : await getDiffInDays();
           if (diffInDays >= timeElapsed2) {
             const octokit = new Octokit({
               auth: githubToken2,
